@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+
+/* ============================================
+   HEADER
+============================================ */
+
+.page-header {
+    background: #123b8f;
+    color: white;
+    padding: 35px 8%;
+}
+
+
+.page-header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+
+.page-header p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+
+/* ============================================
+   CONTAINER
+============================================ */
+
+.jobs-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+}
+
+
+/* ============================================
+   JOB CARD
+============================================ */
+
+.job-card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 20px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.job-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 15px;
+}
+
+
+.job-card h2 {
+    color: #123b8f;
+    margin-bottom: 8px;
+}
+
+
+.job-type {
+    display: inline-block;
+
+    background: #e8f0ff;
+    color: #123b8f;
+
+    padding: 5px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+.job-location {
+    margin: 12px 0;
+}
+
+
+.job-salary {
+    margin: 12px 0;
+
+    font-weight: bold;
+}
+
+
+.job-description {
+    margin: 15px 0;
+
+    line-height: 1.6;
+}
+
+
+.job-date {
+    color: #777;
+
+    font-size: 14px;
+
+    margin-top: 15px;
+}
+
+
+/* ============================================
+   DELETE BUTTON
+============================================ */
+
+.delete-btn {
+    border: none;
+
+    background: #dc3545;
+    color: white;
+
+    padding: 9px 18px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    margin-top: 10px;
+}
+
+
+.delete-btn:hover {
+    background: #b02a37;
+}
+
+
+/* ============================================
+   EMPTY JOBS
+============================================ */
+
+.empty-jobs {
+    background: white;
+
+    text-align: center;
+
+    padding: 60px 30px;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+
+.empty-jobs h2 {
+    margin-bottom: 12px;
+
+    color: #123b8f;
+}
+
+
+.empty-jobs p {
+    margin-bottom: 25px;
+
+    color: #666;
+}
+
+
+.post-job-btn {
+    display: inline-block;
+
+    background: #123b8f;
+    color: white;
+
+    text-decoration: none;
+
+    padding: 12px 25px;
+
+    border-radius: 6px;
+}
+
+
+.post-job-btn:hover {
+    background: #0d2c6b;
+}

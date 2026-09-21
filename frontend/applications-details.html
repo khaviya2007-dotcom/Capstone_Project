@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Application Details | JobFinder</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1f4e79;
+        }
+
+        .candidate-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .detail {
+            margin: 16px 0;
+            font-size: 18px;
+            color: #444;
+        }
+
+        .detail strong {
+            color: #222;
+        }
+
+        .status {
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            color: white;
+        }
+
+        #shortlistBtn {
+            background: #20a67a;
+        }
+
+        #rejectBtn {
+            background: #e85b6b;
+        }
+
+        #closeBtn {
+            background: #555;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Application Details</h1>
+
+        <div class="candidate-name" id="candidateName">
+            Loading...
+        </div>
+
+        <div class="detail">
+            📧 <strong>Email:</strong>
+            <span id="candidateEmail">Loading...</span>
+        </div>
+
+        <div class="detail">
+            💼 <strong>Job:</strong>
+            <span id="jobTitle">Loading...</span>
+        </div>
+
+        <div class="detail">
+            📍 <strong>Location:</strong>
+            <span id="jobLocation">Loading...</span>
+        </div>
+
+        <div class="detail">
+            💰 <strong>Salary:</strong>
+            <span id="jobSalary">Loading...</span>
+        </div>
+
+        <div class="detail">
+            📅 <strong>Applied Date:</strong>
+            <span id="appliedDate">Loading...</span>
+        </div>
+
+        <div class="detail">
+            📌 <strong>Status:</strong>
+            <span id="applicationStatus" class="status">
+                Loading...
+            </span>
+        </div>
+
+        <div class="buttons">
+
+            <button id="shortlistBtn">
+                Shortlist
+            </button>
+
+            <button id="rejectBtn">
+                Reject
+            </button>
+
+            <button id="closeBtn">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // ==========================================
+        // LOAD APPLICATION DETAILS
+        // ==========================================
+
+        async function loadApplicationDetails() {
+
+            try {
+
+                const selectedApplication =
+                    JSON.parse(
+                        localStorage.getItem("selectedApplication")
+                    );
+
+                if (!selectedApplication) {
+
+                    alert("No application selected!");
+
+                    return;
+                }
+
+
+                // Get all applications from backend
+
+                const response = await fetch(
+                    "http://localhost:5000/api/applications"
+                );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Failed to load applications"
+                    );
+                }
+
+
+                const applications =
+                    await response.json();
+
+
+                // Find selected application
+
+                const application =
+                    applications.find(
+                        app =>
+                            String(app.id) ===
+                            String(selectedApplication.id)
+                    );
+
+
+                if (!application) {
+
+                    alert("Application not found!");
+
+                    return;
+                }
+
+
+                // ==========================================
+                // DISPLAY DATA
+                // ==========================================
+
+                document.getElementById(
+                    "candidateName"
+                ).textContent =
+                    application.name ||
+                    "Not available";
+
+
+                document.getElementById(
+                    "candidateEmail"
+                ).textContent =
+                    application.email ||
+                    "Not available";
+
+
+                document.getElementById(
+                    "jobTitle"
+                ).textContent =
+                    application.title ||
+                    "Not available";
+
+
+                document.getElementById(
+                    "jobLocation"
+                ).textContent =
+                    application.location ||
+                    "Not available";
+
+
+                document.getElementById(
+                    "jobSalary"
+                ).textContent =
+                    application.salary ||
+                    "Not specified";
+
+
+                // ==========================================
+                // APPLIED DATE
+                // ==========================================
+
+                if (application.applied_at) {
+
+                    const date =
+                        new Date(application.applied_at);
+
+                    document.getElementById(
+                        "appliedDate"
+                    ).textContent =
+                        date.toLocaleDateString();
+
+                } else {
+
+                    document.getElementById(
+                        "appliedDate"
+                    ).textContent =
+                        "Not available";
+                }
+
+
+                // ==========================================
+                // STATUS
+                // ==========================================
+
+                const currentStatus =
+                    application.status === "Applied"
+                        ? "Pending"
+                        : application.status || "Pending";
+
+
+                document.getElementById(
+                    "applicationStatus"
+                ).textContent =
+                    currentStatus;
+
+
+                // Save latest application
+
+                localStorage.setItem(
+                    "selectedApplication",
+                    JSON.stringify(application)
+                );
+
+
+                // ==========================================
+                // SHORTLIST
+                // ==========================================
+
+                document.getElementById(
+                    "shortlistBtn"
+                ).onclick = function () {
+
+                    updateApplicationStatus(
+                        application.id,
+                        "Shortlisted"
+                    );
+
+                };
+
+
+                // ==========================================
+                // REJECT
+                // ==========================================
+
+                document.getElementById(
+                    "rejectBtn"
+                ).onclick = function () {
+
+                    updateApplicationStatus(
+                        application.id,
+                        "Rejected"
+                    );
+
+                };
+
+
+            } catch (error) {
+
+                console.error(
+                    "Application Details Error:",
+                    error
+                );
+
+                alert(
+                    "Unable to load application details!"
+                );
+            }
+        }
+
+
+        // ==========================================
+        // UPDATE STATUS
+        // ==========================================
+
+        async function updateApplicationStatus(
+            applicationId,
+            status
+        ) {
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:5000/api/applications/"
+                    + applicationId
+                    + "/status",
+                    {
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            status: status
+                        })
+                    }
+                );
+
+
+                const result =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        result.message ||
+                        "Status update failed"
+                    );
+                }
+
+
+                // Update status on page
+
+                document.getElementById(
+                    "applicationStatus"
+                ).textContent =
+                    status;
+
+
+                // Update localStorage
+
+                const application =
+                    JSON.parse(
+                        localStorage.getItem(
+                            "selectedApplication"
+                        )
+                    );
+
+
+                if (application) {
+
+                    application.status = status;
+
+                    localStorage.setItem(
+                        "selectedApplication",
+                        JSON.stringify(application)
+                    );
+                }
+
+
+                alert(
+                    "Application status updated successfully!"
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Status Update Error:",
+                    error
+                );
+
+                alert(
+                    "Status update failed!"
+                );
+            }
+        }
+
+
+        // ==========================================
+        // CLOSE BUTTON
+        // ==========================================
+        document.getElementById("closeBtn")
+    .addEventListener("click", function() {
+        window.location.href = "applications.html";
+    });
+        
+
+        // ==========================================
+        // LOAD
+        // ==========================================
+
+        loadApplicationDetails();
+
+    </script>
+
+</body>
+</html>

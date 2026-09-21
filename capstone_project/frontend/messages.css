@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+}
+
+.messages-container {
+    min-height: 100vh;
+    padding: 50px;
+}
+
+.messages-card {
+    max-width: 1000px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    color: #1f3c88;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: #1f3c88;
+}
+
+.message-box {
+    margin-top: 40px;
+    padding: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}

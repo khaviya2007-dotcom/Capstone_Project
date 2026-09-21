@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - Job Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #0f4c81,
+                #2196f3,
+                #6dd5ed
+            );
+
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            background: #111827;
+            padding: 18px 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h2 {
+            color: white;
+            font-size: 24px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #60a5fa;
+        }
+
+        /* Register Area */
+        .register-section {
+            min-height: calc(100vh - 70px);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px 20px;
+        }
+
+        /* Register Card */
+        .register-container {
+            width: 100%;
+            max-width: 430px;
+
+            background: rgba(255, 255, 255, 0.97);
+
+            padding: 40px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .register-container h1 {
+            text-align: center;
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* Input fields */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px 15px;
+
+            border: 1px solid #ccc;
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #2196f3;
+
+            box-shadow:
+                0 0 5px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Register button */
+        .register-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #2196f3;
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-top: 10px;
+        }
+
+        .register-btn:hover {
+            background: #1565c0;
+        }
+
+        /* Login link */
+        .login-text {
+            text-align: center;
+            margin-top: 22px;
+
+            color: #555;
+        }
+
+        .login-text a {
+            color: #1565c0;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Message */
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            header {
+                padding: 15px 20px;
+            }
+
+            header h2 {
+                font-size: 20px;
+            }
+
+            nav a {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+
+            .register-container {
+                padding: 28px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+
+        <h2>Job Portal</h2>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#jobs">Jobs</a>
+            <a href="login.html">Login</a>
+            <a href="register.html">Register</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Register Section -->
+    <section class="register-section">
+
+        <div class="register-container">
+
+            <h1>Create Account</h1>
+
+            <p class="subtitle">
+                Join our Job Portal and find your dream job
+            </p>
+
+
+            <!-- Register Form -->
+            <form id="registerForm">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                        minlength="6"
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="register-btn"
+                >
+                    Register
+                </button>
+
+            </form>
+
+
+            <p id="message"></p>
+
+
+            <p class="login-text">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        const registerForm =
+            document.getElementById("registerForm");
+
+        const message =
+            document.getElementById("message");
+
+
+        registerForm.addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById("name").value.trim();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =....
+            fetch(...)
+            .catch(...)
+                document.getElementById("password").value;
+
+
+            if (name === "" || email === "" || password === "") {
+
+                message.style.color = "red";
+                message.textContent =
+                    "Please fill all fields.";
+
+                return;
+            }
+
+
+            if (password.length < 6) {
+
+                message.style.color = "red";
+                message.textContent =
+                    "Password must contain at least 6 characters.";
+
+                return;
+            }
+
+
+            try {
+
+                const response = await fetch(
+                    "http://localhost:5000/api/register",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            password: password
+                        })
+                    }
+                );
+
+
+                const data = await response.json();
+
+
+                if (response.ok) {
+
+                    message.style.color = "green";
+
+                    message.textContent =
+                        "Registration successful!";
+
+                    registerForm.reset();
+
+
+                    setTimeout(function() {
+
+                        window.location.href =
+                            "login.html";
+
+                    }, 1500);
+
+                } else {
+
+                    message.style.color = "red";
+
+                    message.textContent =
+                        data.message ||
+                        "Registration failed.";
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                message.style.color = "red";
+
+                message.textContent =
+                    "Server is not running. Please start the backend.";
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
