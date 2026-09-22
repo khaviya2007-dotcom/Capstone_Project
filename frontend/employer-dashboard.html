@@ -472,12 +472,15 @@
                 const jobsData =
                     await jobsResponse.json();
 
-                const jobs =
-                    Array.isArray(jobsData)
-                        ? jobsData
-                        : (jobsData.jobs || []);
+                let jobs = [];
 
-
+if (Array.isArray(jobsData)) {
+    jobs = jobsData;
+} else if (Array.isArray(jobsData.jobs)) {
+    jobs = jobsData.jobs;
+} else if (Array.isArray(jobsData.data)) {
+    jobs = jobsData.data;s
+}
                 // ALL JOBS COUNT
 
                 document.getElementById("jobCount")
@@ -610,10 +613,11 @@
         // START
         // ===================================
 
-        loadCounts();
+               loadCounts();
 
     </script>
 
-</body>
+    <script src="employer-dashboard.js"></script>
 
+</body>
 </html>

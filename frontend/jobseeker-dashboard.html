@@ -257,80 +257,92 @@ console.log("APPLICATIONS:", data);
         
           
 
-        // Load jobs from backend
-        async function loadJobs() {
+                
 
-            try {
+                   
+    async function loadJobs() {
 
-                const response = await fetch(
-                    "http://localhost:5000/api/jobs"
-                );
+    try {
 
-                const jobs = await response.json();
+        const response = await fetch(
+            "http://localhost:5000/api/jobs"
+        );
 
-                const jobsContainer =
-                    document.getElementById("jobs");
-
-                document.getElementById("jobCount").innerText =
-                    jobs.length;
-
-                jobsContainer.innerHTML = "";
-
-                if (jobs.length === 0) {
-
-                    jobsContainer.innerHTML =
-                        "<p>No jobs available currently.</p>";
-
-                    return;
-
-                }
-
-
-                jobs.forEach(job => {
-
-                    const jobDiv =
-                        document.createElement("div");
-
-                    jobDiv.className = "job";
-
-                    jobDiv.innerHTML = `
-
-                        <h3>${job.title || "Job Opportunity"}</h3>
-
-                        <p>
-                            🏢 ${job.company || "Company"}
-                        </p>
-
-                        <p>
-                            📍 ${job.location || "Location not specified"}
-                        </p>
-
-                        <p>
-                            💼 ${job.description || "No description available"}
-                        </p>
-
-                        <button
-                            class="apply-btn"
-                            onclick="applyJob(${job.id})">
-                            Apply Now
-                        </button>
-
-                    `;
-
-                    jobsContainer.appendChild(jobDiv);
-
-                });
-
-            } catch (error) {
-
-                console.error(error);
-
-                document.getElementById("jobs").innerHTML =
-                    "<p>❌ Cannot connect to server.</p>";
-
-            }
-
+        if (!response.ok) {
+            throw new Error("Jobs API failed: " + response.status);
         }
+
+        const data = await response.json();
+
+        console.log("JOBS:", data);
+
+        const jobs = Array.isArray(data)
+            ? data
+            : (data.jobs || data.data || []);
+
+        const jobsContainer =
+            document.getElementById("jobs");
+
+        document.getElementById("jobCount").innerText =
+            jobs.length;
+
+        jobsContainer.innerHTML = "";
+
+        if (jobs.length === 0) {
+
+            jobsContainer.innerHTML =
+                "<p>No jobs available currently.</p>";
+
+            return;
+        }
+
+        jobs.forEach(job => {
+
+            const jobDiv =
+                document.createElement("div");
+
+            jobDiv.className = "job";
+
+            jobDiv.innerHTML = `
+
+                <h3>${job.title || "Job Opportunity"}</h3>
+
+                <p>
+                    🏢 ${job.company || "Company"}
+                </p>
+
+                <p>
+                    📍 ${job.location || "Location not specified"}
+                </p>
+
+                <p>
+                    💰 ${job.salary || "Salary not specified"}
+                </p>
+
+                <p>
+                    💼 ${job.description || "No description available"}
+                </p>
+
+                <button
+                    class="apply-btn"
+                    onclick="applyJob(${job.id})">
+                    Apply Now
+                </button>
+
+            `;
+
+            jobsContainer.appendChild(jobDiv);
+
+        });
+
+    } catch (error) {
+
+        console.error("Jobs Error:", error);
+
+        document.getElementById("jobs").innerHTML =
+            "<p>❌ Cannot connect to server.</p>";
+    }
+}
 
 async function applyJob(jobId) {
 

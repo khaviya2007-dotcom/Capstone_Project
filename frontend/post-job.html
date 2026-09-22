@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,16 +16,28 @@
 
     <div class="post-job-card">
 
+        <!-- =========================
+             PAGE TITLE
+        ========================== -->
+
         <h1>Post a New Job</h1>
 
         <p>
             Create a job opportunity and find the right candidate.
         </p>
 
+
+        <!-- =========================
+             JOB FORM
+        ========================== -->
+
         <form id="jobForm">
 
             <!-- Job Title -->
-            <label for="jobTitle">Job Title</label>
+
+            <label for="jobTitle">
+                Job Title
+            </label>
 
             <input
                 type="text"
@@ -33,8 +46,12 @@
                 required
             >
 
+
             <!-- Company Name -->
-            <label for="company">Company Name</label>
+
+            <label for="company">
+                Company Name
+            </label>
 
             <input
                 type="text"
@@ -43,8 +60,12 @@
                 required
             >
 
+
             <!-- Location -->
-            <label for="location">Location</label>
+
+            <label for="location">
+                Location
+            </label>
 
             <input
                 type="text"
@@ -53,10 +74,17 @@
                 required
             >
 
-            <!-- Job Type -->
-            <label for="jobType">Job Type</label>
 
-            <select id="jobType" required>
+            <!-- Job Type -->
+
+            <label for="jobType">
+                Job Type
+            </label>
+
+            <select
+                id="jobType"
+                required
+            >
 
                 <option value="">
                     Select job type
@@ -80,8 +108,12 @@
 
             </select>
 
+
             <!-- Salary -->
-            <label for="salary">Salary</label>
+
+            <label for="salary">
+                Salary
+            </label>
 
             <input
                 type="text"
@@ -90,7 +122,9 @@
                 required
             >
 
-            <!-- Description -->
+
+            <!-- Job Description -->
+
             <label for="description">
                 Job Description
             </label>
@@ -102,19 +136,28 @@
                 required
             ></textarea>
 
-            <!-- Publish -->
+
+            <!-- =========================
+                 PUBLISH BUTTON
+            ========================== -->
+
             <button
                 type="submit"
                 class="publish-btn"
+                id="publishButton"
             >
                 Publish Job
             </button>
 
         </form>
 
-        <!-- Back -->
+
+        <!-- =========================
+             BACK TO DASHBOARD
+        ========================== -->
+
         <a
-            href="dashboard.html"
+            href="employer-dashboard.html"
             class="back-btn"
         >
             ← Back to Dashboard
@@ -124,8 +167,13 @@
 
 </div>
 
-<!-- JavaScript -->
+
+<!-- =========================
+     JAVASCRIPT
+========================== -->
+
 <script src="post-job.js"></script>
 
 </body>
+
 </html>
