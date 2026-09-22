@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Candidate Profile | JobFinder</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .profile-card {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #26364f;
+        }
+
+        .info {
+            margin: 12px 0;
+            color: #555;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px 8px 0 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #2563eb;
+            color: white;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .back {
+            background: white;
+            color: #2563eb;
+            border: 1px solid #2563eb;
+        }
+
+        .back:hover {
+            background: #eff6ff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="profile-card">
+
+        <div class="avatar" id="avatar">AK</div>
+
+        <h1 id="candidateName">Candidate Name</h1>
+
+        <p class="info">
+            <strong>Position:</strong>
+            <span id="candidatePosition"></span>
+        </p>
+
+        <p class="info">
+            <strong>Location:</strong>
+            <span id="candidateLocation"></span>
+        </p>
+
+        <p class="info">
+            <strong>Email:</strong>
+            <span id="candidateEmail"></span>
+        </p>
+
+        <h3>About Candidate</h3>
+
+        <p id="candidateAbout"></p>
+
+        <button onclick="sendMessage()">
+            Message
+        </button>
+
+        <button onclick="contactCandidate()">
+            Contact
+        </button>
+
+        <button onclick="reviewCandidate()">
+            Review
+        </button>
+
+        <button class="back" onclick="goBack()">
+            ← Back to Candidates
+        </button>
+
+    </div>
+
+    <script>
+
+        // Get candidate details from URL
+        const params = new URLSearchParams(
+            window.location.search
+        );
+
+        const candidate = {
+    userId: params.get("userId"),
+    name: params.get("name"),
+    position: params.get("position"),
+    location: params.get("location"),
+    email: params.get("email"),
+    phone: params.get("phone"),
+    about: params.get("about")
+};
+
+        // Display candidate details
+        document.getElementById("candidateName").textContent =
+            candidate.name;
+
+        document.getElementById("candidatePosition").textContent =
+            candidate.position;
+
+        document.getElementById("candidateLocation").textContent =
+            candidate.location;
+
+        document.getElementById("candidateEmail").textContent =
+            candidate.email;
+
+        document.getElementById("candidateAbout").textContent =
+            candidate.about;
+
+        // Generate initials
+        document.getElementById("avatar").textContent =
+            candidate.name
+                .split(" ")
+                .map(word => word[0])
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+
+        // Message button
+        function sendMessage() {
+    const url =
+        "messages.html?" +
+        new URLSearchParams({
+            name: candidate.name,
+            userId: candidate.userId
+        }).toString();
+
+    window.location.href = url;
+}
+
+        // Contact button
+        function contactCandidate() {
+
+            alert(
+                "Email: " + candidate.email + "\n" +
+                "Phone: " + candidate.phone
+            );
+        }
+
+        // Review button
+        function reviewCandidate() {
+
+            let rating = prompt(
+                "Rate this candidate (1-5):"
+            );
+
+            if (rating === null) {
+                return;
+            }
+
+            rating = Number(rating);
+
+            if (
+                !Number.isInteger(rating) ||
+                rating < 1 ||
+                rating > 5
+            ) {
+                alert(
+                    "Please enter a rating between 1 and 5."
+                );
+                return;
+            }
+
+            alert(
+                "Candidate: " + candidate.name + "\n" +
+                "Rating: " + rating + "/5\n" +
+                "Review submitted successfully!"
+            );
+        }
+
+        // Back button
+        function goBack() {
+
+            window.location.href = "candidates.html";
+        }
+
+    </script>
+
+</body>
+</html>

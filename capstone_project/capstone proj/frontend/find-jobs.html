@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find Jobs | Job Portal</title>
+
+    <link rel="stylesheet" href="find-jobs.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            Job<span>Portal</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="find-jobs.html" class="active">Find Jobs</a>
+            <a href="applications.html">Applications</a>
+        </div>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div class="hero-content">
+            <p class="small-title">🚀 FIND YOUR DREAM CAREER</p>
+
+            <h1>
+                Discover Your Next
+                <span>Opportunity</span>
+            </h1>
+
+            <p class="hero-text">
+                Explore exciting opportunities and take the next step
+                towards your dream career.
+            </p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+
+            <div class="search-input">
+                🔍
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search job title..."
+                >
+            </div>
+
+            <div class="search-input">
+                📍
+                <input
+                    type="text"
+                    id="locationInput"
+                    placeholder="Location..."
+                >
+            </div>
+
+            <button onclick="searchJobs()">
+                Search Jobs
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- Jobs Section -->
+    <section class="jobs-section">
+
+        <div class="section-header">
+
+            <div>
+                <p class="section-tag">LATEST OPPORTUNITIES</p>
+                <h2>Available Jobs</h2>
+            </div>
+
+            <p id="jobCount">Loading jobs...</p>
+
+        </div>
+
+
+        <!-- Jobs Container -->
+        <div id="jobsContainer" class="jobs-grid">
+            <!-- Jobs will come from JavaScript -->
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <h2>Job<span>Portal</span></h2>
+        <p>Find opportunities. Build your future. 🚀</p>
+        <p class="copyright">
+            © 2026 Job Portal. All rights reserved.
+        </p>
+    </footer>
+
+
+    <script src="find-jobs.js"></script>
+
+</body>
+</html>
